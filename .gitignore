@@ -2,4 +2,5 @@ corpus/
 node_modules/
 build/
 *.pdf
+!examples/**/*.pdf
 .DS_Store

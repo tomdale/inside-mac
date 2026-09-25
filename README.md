@@ -4,6 +4,22 @@ Agent skills for writing technical documentation in the style of Apple's **Insid
 
 *Inside Macintosh* (1985–1994) is still one of the best-taught developer documentation series. It separates concepts from tasks from reference. It tells each reader what they can skip. It puts warnings at the point of danger, and it specifies every contract completely. These skills capture those techniques and drop what hasn't aged well: page references, Pascal-first examples, global result codes, and hedged sample code.
 
+## Example
+
+[`examples/zustand`](examples/zustand) is a complete, from-scratch guide these skills produced for
+[Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management library — six
+chapters, a preface, and three appendixes, rendered to a 68-page PDF with `imac-pdf-book`. It is
+unofficial and not affiliated with pmndrs; see the example's own README for how it was produced and
+which version of Zustand it documents.
+
+<p>
+  <img src="examples/zustand/preview/01-cover.png" alt="Cover of Inside Zustand: State Management with Zustand" width="45%">
+  <img src="examples/zustand/preview/04-figure.png" alt="A middleware composition figure from the Zustand guide" width="45%">
+</p>
+
+[Read the PDF](<examples/zustand/Inside Zustand- State Management for React.pdf>) ·
+[Read the source](examples/zustand/src) · [Read the README](examples/zustand/README.md)
+
 ## Skills
 
 | Skill | Use it to |
