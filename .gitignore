@@ -1,0 +1,5 @@
+corpus/
+node_modules/
+build/
+*.pdf
+.DS_Store

@@ -1,0 +1,42 @@
+# Inside Macintosh PDFs hosted by vintageapple.org. One URL per line.
+# Original series (1985–1991)
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_I_1985.pdf
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_II_1985.pdf
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_III_1985.pdf
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_IV_1986.pdf
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_V_1986.pdf
+https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_VI_1991.pdf
+# New series (1992–1994)
+https://vintageapple.org/inside_r/pdf/AOCE_Application_Interfaces_1994.pdf
+https://vintageapple.org/inside_r/pdf/AOCE_Service_Access_Modules_1994.pdf
+https://vintageapple.org/inside_r/pdf/Devices_1994.pdf
+https://vintageapple.org/inside_r/pdf/Files_1992.pdf
+https://vintageapple.org/inside_r/pdf/Human_Interface_Guidelines_1992.pdf
+https://vintageapple.org/inside_r/pdf/Imaging_With_QuickDraw_1994.pdf
+https://vintageapple.org/inside_r/pdf/Interapplication_Comm_1993.pdf
+https://vintageapple.org/inside_r/pdf/Macintosh_TB_Essentials_1992.pdf
+https://vintageapple.org/inside_r/pdf/Memory_1992.pdf
+https://vintageapple.org/inside_r/pdf/More_Macintosh_TB_1993.pdf
+https://vintageapple.org/inside_r/pdf/Networking_1994.pdf
+https://vintageapple.org/inside_r/pdf/Operating_System_Utils_1994.pdf
+https://vintageapple.org/inside_r/pdf/Overview_1992.pdf
+https://vintageapple.org/inside_r/pdf/PPC_Numerics_1994.pdf
+https://vintageapple.org/inside_r/pdf/PPC_System_Software_1994.pdf
+https://vintageapple.org/inside_r/pdf/Processes_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Environment_%26_Utils_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Graphics_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Objects_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Printing_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Printing_Ext_%26_Drvrs_1994.pdf
+https://vintageapple.org/inside_r/pdf/QD_GX_Typography_1994.pdf
+https://vintageapple.org/inside_r/pdf/QuickTime_1993.pdf
+https://vintageapple.org/inside_r/pdf/QuickTime_Components_1993.pdf
+https://vintageapple.org/inside_r/pdf/Sound_1994.pdf
+https://vintageapple.org/inside_r/pdf/Text_1993.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_General_Index_A-L_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_General_Index_M-Z_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_Glossary_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_Index_of_Constants_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_Index_of_Field_Names_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_Index_of_Routines_1994.pdf
+https://vintageapple.org/inside_r/pdf/X-Ref_-_Result_Codes_1994.pdf
