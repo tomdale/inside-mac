@@ -7,9 +7,9 @@ Agent skills for writing technical documentation in the style of Apple's **Insid
 ## Examples
 
 [`examples/zustand`](examples/zustand) is a complete, from-scratch guide these skills produced for
-[Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management library — six
+[Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management library: six
 chapters, a preface, and three appendixes, rendered to a 67-page PDF with `imac-pdf-book`. It is
-unofficial and not affiliated with pmndrs; see the example's own README for how it was produced and
+unofficial and not affiliated with pmndrs. See the example's own README for how it was produced and
 which version of Zustand it documents.
 
 <p>
@@ -21,10 +21,9 @@ which version of Zustand it documents.
 [Read the source](examples/zustand/src) · [Read the README](examples/zustand/README.md)
 
 [`examples/skills-cli`](examples/skills-cli) is a complete guide to the [`skills`](https://github.com/vercel-labs/skills)
-CLI (the open agent skills ecosystem, `npx skills …`) — six chapters, a preface, and three
-appendixes, rendered to a 51-page PDF with `imac-pdf-book`. It is unofficial and not affiliated with
-or endorsed by Vercel; see the example's own README for how it was produced and which version and
-commit of `skills` it documents.
+CLI (the open agent skills ecosystem, `npx skills …`): six chapters, a preface, and three
+appendixes, rendered to a 51-page PDF with `imac-pdf-book`. See the example's own README for how it
+was produced and which version and commit of `skills` it documents.
 
 <p>
   <img src="examples/skills-cli/preview/01-cover.png" alt="Cover of Agent Skills and the skills CLI" width="45%">
