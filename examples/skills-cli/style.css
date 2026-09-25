@@ -1,0 +1,97 @@
+/* Print design after Inside Macintosh (1992–94): serif text, sans headings,
+   generous outer margin, rules under chapter titles, labeled notes. */
+
+@page {
+  size: 7.5in 9.25in;
+  margin: 0.85in 0.8in 0.85in 1.05in;
+  @top-left { content: string(chapter-label); font: 8pt "Helvetica Neue", Helvetica, sans-serif; color: #555; }
+  @top-right { content: string(chapter-title); font: 8pt "Helvetica Neue", Helvetica, sans-serif; color: #555; }
+  @bottom-right { content: counter(page); font: 600 8.5pt "Helvetica Neue", Helvetica, sans-serif; }
+  @bottom-left { content: "__BOOK_TITLE__"; font: 7.5pt "Helvetica Neue", Helvetica, sans-serif; color: #888; }
+}
+@page :left {
+  margin: 0.85in 1.05in 0.85in 0.8in;
+  @bottom-left { content: counter(page); font: 600 8.5pt "Helvetica Neue", Helvetica, sans-serif; color: #000; }
+  @bottom-right { content: "__BOOK_TITLE__"; font: 7.5pt "Helvetica Neue", Helvetica, sans-serif; color: #888; }
+}
+@page cover { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-left { content: none } @bottom-right { content: none } }
+
+html { font-family: "Palatino", "Palatino Linotype", "Book Antiqua", Georgia, serif; font-size: 9.4pt; line-height: 1.38; color: #111; }
+body { margin: 0; }
+p { margin: 0 0 0.65em; orphans: 3; widows: 3; hyphens: auto; }
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 700; }
+
+/* Cover */
+.cover { page: cover; height: 9.25in; box-sizing: border-box; padding: 1.6in 0.9in 0.8in; background: #111; color: #f4f4f4;
+  display: flex; flex-direction: column; break-after: page; }
+.cover-kicker { font: 600 11pt "Helvetica Neue", Helvetica, sans-serif; letter-spacing: 0.25em; text-transform: uppercase; color: #9a9a9a; }
+.cover-title { font: 700 46pt/1 "Helvetica Neue", Helvetica, sans-serif; letter-spacing: -0.02em; margin: 0.25in 0 0.2in;
+  border-top: 3pt solid #f4f4f4; padding-top: 0.2in; }
+.cover-sub { font: 400 15pt/1.3 "Palatino", serif; font-style: italic; color: #ddd; max-width: 4.6in; }
+.cover-meta { margin-top: auto; font: 8.5pt/1.5 "Helvetica Neue", Helvetica, sans-serif; color: #aaa; max-width: 4.8in; }
+.cover-meta code { color: #ddd; background: none; }
+
+/* Table of contents */
+.toc-page { break-after: page; }
+h2.toc-title { font: 700 22pt "Helvetica Neue", Helvetica, sans-serif; border-bottom: 2pt solid #000; padding-bottom: 6pt; margin: 0 0 14pt; }
+ul.toc { list-style: none; padding: 0; margin: 0; }
+ul.toc li a { display: flex; align-items: baseline; }
+ul.toc li a::after { content: target-counter(attr(href url), page); margin-left: auto; padding-left: 8pt; font-family: "Helvetica Neue", Helvetica, sans-serif; }
+li.toc-1 { margin-top: 7pt; font: 700 9.5pt "Helvetica Neue", Helvetica, sans-serif; }
+li.toc-1 .toc-label { width: 0.95in; flex: none; color: #666; font-weight: 500; }
+li.toc-2 { font-size: 8.8pt; padding-left: 0.95in; color: #222; }
+li.toc-2 a::after { font-size: 8.5pt; color: #444; }
+
+/* Chapter openers */
+section[class$="-start"] { break-before: page; margin: 0.5in 0 0.3in; }
+.pagedjs_page:has(section[class$="-start"]) .pagedjs_margin-top > * { visibility: hidden; }
+.chapter-label { font: 600 10pt "Helvetica Neue", Helvetica, sans-serif; letter-spacing: 0.18em; text-transform: uppercase; color: #666;
+  string-set: chapter-label content(text); }
+h1.chapter { font: 700 27pt/1.1 "Helvetica Neue", Helvetica, sans-serif; letter-spacing: -0.01em; margin: 6pt 0 0;
+  border-top: 3pt solid #000; padding-top: 10pt; string-set: chapter-title content(text); }
+h1.chapter.unnumbered { border-top-width: 3pt; }
+
+h2 { font: 700 14pt/1.2 "Helvetica Neue", Helvetica, sans-serif; margin: 17pt 0 6pt; border-top: 0.75pt solid #000; padding-top: 5pt; break-after: avoid; }
+h3 { font: 700 10.8pt/1.25 "Helvetica Neue", Helvetica, sans-serif; margin: 12pt 0 4pt; break-after: avoid; }
+h4 { font: 700 9.6pt "Helvetica Neue", Helvetica, sans-serif; margin: 9pt 0 3pt; break-after: avoid; }
+
+/* Roadmap paragraphs right after chapter titles */
+section[class$="-start"] + p { font-size: 11pt; line-height: 1.4; }
+
+ul, ol { margin: 0 0 0.7em; padding-left: 1.35em; }
+li { margin: 0.15em 0; }
+li > p { margin: 0.2em 0; }
+
+code { font-family: "Menlo", "SF Mono", Consolas, monospace; font-size: 0.84em; background: #f1f1f1; padding: 0 2px; border-radius: 2px; }
+pre.code { font: 7.6pt/1.42 "Menlo", "SF Mono", Consolas, monospace; background: #f6f6f6; border-left: 2.5pt solid #222; padding: 7pt 9pt;
+  margin: 6pt 0 10pt; white-space: pre-wrap; word-break: break-word; }
+pre.code code { background: none; padding: 0; font-size: inherit; }
+
+table { border-collapse: collapse; width: 100%; margin: 6pt 0 12pt; font: 7.9pt/1.35 "Helvetica Neue", Helvetica, sans-serif; }
+thead { display: table-header-group; break-after: avoid; }
+tbody tr:first-child { break-before: avoid; }
+h2 + table, h3 + table, h4 + table, p + table { break-before: avoid; }
+th { text-align: left; font-weight: 700; border-top: 1.2pt solid #000; border-bottom: 0.6pt solid #000; padding: 4pt 5pt; vertical-align: bottom; }
+td { border-bottom: 0.4pt solid #bbb; padding: 3.5pt 5pt; vertical-align: top; }
+tr { break-inside: avoid; }
+td code, th code { font-size: 0.92em; background: none; padding: 0; }
+
+/* Callouts: labeled, left-ruled boxes */
+.callout { margin: 9pt 0 11pt; padding: 6pt 10pt 4pt 10pt; border-left: 3pt solid #000; background: #f4f4f4; break-inside: avoid; font-size: 9.2pt; }
+.callout-label { font: 700 7.5pt "Helvetica Neue", Helvetica, sans-serif; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2pt; }
+.callout.note { border-left-color: #777; background: #f7f7f7; }
+.callout.important { border-left-color: #000; background: #efefef; }
+.callout.warning { border-left-color: #b00; background: #fbefef; }
+.callout.warning .callout-label { color: #900; }
+.callout p:last-child { margin-bottom: 0.3em; }
+
+/* Figures */
+figure { margin: 12pt 0 14pt; break-inside: avoid; }
+p.figcaption { font: 8.8pt/1.35 "Helvetica Neue", Helvetica, sans-serif; margin: 0 0 5pt; }
+p.figcaption strong { font-weight: 700; }
+pre.mermaid { background: none; border: 0.5pt solid #ccc; padding: 10pt 6pt; margin: 0 0 14pt; text-align: center; break-inside: avoid; }
+pre.mermaid svg { max-width: 92% !important; height: auto; max-height: 3.7in; }
+
+blockquote { margin: 8pt 0; padding-left: 10pt; border-left: 1.5pt solid #999; color: #333; font-style: italic; }
+hr { border: 0; border-top: 0.5pt solid #999; margin: 14pt 0; }

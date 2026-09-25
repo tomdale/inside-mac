@@ -1,0 +1,14 @@
+{
+  "name": "imac-book",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "marked": "^15.0.0",
+    "mermaid": "^11.4.0",
+    "pagedjs": "^0.4.3",
+    "puppeteer-core": "^23.11.1"
+  }
+}

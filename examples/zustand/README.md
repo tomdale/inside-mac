@@ -4,7 +4,7 @@ A complete example output of the `inside-mac` skills: a from-scratch, Inside-Mac
 technical guide to [Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management
 library, rendered as a print-quality PDF book with `imac-pdf-book`.
 
-**[Read the PDF](./Inside%20Zustand-%20State%20Management%20for%20React.pdf)** — 68 pages.
+**[Read the PDF](./Inside%20Zustand-%20State%20Management%20for%20React.pdf)** — 67 pages.
 
 This guide is unofficial and independently written. It is not affiliated with, endorsed by, or
 reviewed by the pmndrs organization or Zustand's maintainers. Zustand is MIT-licensed; see
@@ -91,8 +91,8 @@ PDF="Inside Zustand- State Management for React.pdf"
 pdftoppm -r 150 -png -f 1 -l 1 -singlefile "$PDF" preview/01-cover
 pdftoppm -r 150 -png -f 2 -l 2 -singlefile "$PDF" preview/02-contents
 pdftoppm -r 150 -png -f 7 -l 7 -singlefile "$PDF" preview/03-chapter-opener
-pdftoppm -r 150 -png -f 37 -l 37 -singlefile "$PDF" preview/04-figure
-pdftoppm -r 150 -png -f 43 -l 43 -singlefile "$PDF" preview/05-reference
+pdftoppm -r 150 -png -f 12 -l 12 -singlefile "$PDF" preview/04-figure
+pdftoppm -r 150 -png -f 42 -l 42 -singlefile "$PDF" preview/05-reference
 ```
 
 Page numbers above match this build; a future edit to `src/` will shift them, so re-check the PDF's

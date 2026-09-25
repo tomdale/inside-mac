@@ -69,7 +69,9 @@ pre.code { font: 7.6pt/1.42 "Menlo", "SF Mono", Consolas, monospace; background:
 pre.code code { background: none; padding: 0; font-size: inherit; }
 
 table { border-collapse: collapse; width: 100%; margin: 6pt 0 12pt; font: 7.9pt/1.35 "Helvetica Neue", Helvetica, sans-serif; }
-thead { display: table-header-group; }
+thead { display: table-header-group; break-after: avoid; }
+tbody tr:first-child { break-before: avoid; }
+h2 + table, h3 + table, h4 + table, p + table { break-before: avoid; }
 th { text-align: left; font-weight: 700; border-top: 1.2pt solid #000; border-bottom: 0.6pt solid #000; padding: 4pt 5pt; vertical-align: bottom; }
 td { border-bottom: 0.4pt solid #bbb; padding: 3.5pt 5pt; vertical-align: top; }
 tr { break-inside: avoid; }
@@ -89,7 +91,7 @@ figure { margin: 12pt 0 14pt; break-inside: avoid; }
 p.figcaption { font: 8.8pt/1.35 "Helvetica Neue", Helvetica, sans-serif; margin: 0 0 5pt; }
 p.figcaption strong { font-weight: 700; }
 pre.mermaid { background: none; border: 0.5pt solid #ccc; padding: 10pt 6pt; margin: 0 0 14pt; text-align: center; break-inside: avoid; }
-pre.mermaid svg { max-width: 100% !important; height: auto; max-height: 5.6in; }
+pre.mermaid svg { max-width: 100% !important; height: auto; max-height: 4.4in; }
 
 blockquote { margin: 8pt 0; padding-left: 10pt; border-left: 1.5pt solid #999; color: #333; font-style: italic; }
 hr { border: 0; border-top: 0.5pt solid #999; margin: 14pt 0; }
