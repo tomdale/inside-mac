@@ -1,28 +1,32 @@
 # Inside Skills: Agent Skills and the skills CLI
 
 A complete, from-scratch technical guide to the [`skills`](https://github.com/vercel-labs/skills)
-CLI — the open agent skills ecosystem, installed and run as `npx skills …` — written and rendered
-using an earlier version of this repository's `inside-mac` skill. It is **unofficial**: not affiliated with, endorsed by, or
-reviewed by Vercel, Inc. or the `skills` maintainers.
+CLI, the package manager for the open agent skills ecosystem (installed and run as `npx skills …`),
+written and rendered with this repository's `inside-mac` skill. It is **unofficial**: not affiliated
+with, endorsed by, or reviewed by Vercel, Inc. or the `skills` maintainers.
 
-- **Covers:** `skills` v1.7.0, commit [`7407f38`](https://github.com/vercel-labs/skills/commit/7407f3893ad4dceab546ac002c3ef806e4000c73)
-  (`7407f3893ad4dceab546ac002c3ef806e4000c73`), cloned `--depth 1` from
-  `https://github.com/vercel-labs/skills`.
-- **Length:** 51 pages (front matter, 6 chapters, 3 appendixes).
+- **Covers:** `skills` 1.7.4, tag [`v1.7.4`](https://github.com/vercel-labs/skills/tree/v1.7.4)
+  (commit [`a80e4c9`](https://github.com/vercel-labs/skills/commit/a80e4c9d12d607631249d4d7d059f835d4b2f13a)),
+  the release that `npx skills@1.7.4` installs.
+- **Length:** 58 pages (front matter, 7 chapters, 3 appendixes).
 - **License of the subject project:** MIT, © Vercel, Inc. This guide quotes only command names,
   flag names, and short output fragments from that public repository; the surrounding prose is
   original.
 
 ## Contents
 
-1. Introduction to Agent Skills
-2. Skill Packages
-3. Installing and Managing Skills
-4. Agent Targets
-5. Authoring and Publishing Skills
-6. Command Reference
+The CLI is one system, so the book separates concepts, tasks, and reference across chapters:
 
-Plus a Preface and three appendixes: Glossary, File Formats, and Known Gaps and Open Questions.
+1. Introduction to Agent Skills
+2. About Skills and Sources
+3. About Scopes, Agents, and Lock Files
+4. Installing and Managing Skills
+5. Sharing Skills Through a Project
+6. Authoring and Publishing Skills
+7. Command Reference
+
+The book also has a Preface and three appendixes: Files and Environment Variables, Errors and
+Recovery, and Glossary.
 
 ## Previews
 
@@ -32,36 +36,44 @@ Plus a Preface and three appendixes: Glossary, File Formats, and Known Gaps and 
   <img src="preview/03-chapter-opener.png" alt="Chapter 1 opener" width="32%">
 </p>
 <p>
-  <img src="preview/04-figure.png" alt="Figure 4-1, an agent-targets decision diagram" width="32%">
-  <img src="preview/05-reference.png" alt="A command-reference page with global options and environment variables" width="32%">
+  <img src="preview/04-figure.png" alt="Figure 3-1, symlink mode compared with copy mode" width="32%">
+  <img src="preview/05-reference.png" alt="The skills add entry in the command reference" width="32%">
 </p>
 
 ## How this was produced
 
-That earlier version split its guidance into separate `imac-*` skills. Each is named below by the
-reference file in [`skills/inside-mac`](../../skills/inside-mac) that now holds its guidance. That version also ended
-each chapter with a prose Summary section, which is why the chapters in `src/` have one.
+The guide was written with the [`inside-mac`](../../skills/inside-mac) skill by the same multi-agent
+workflow as the [Zustand example](../zustand/README.md#how-this-was-produced): one planning agent,
+one drafting agent per file, a cutting pass, three whole-book reviewers (structure and content,
+accuracy, and prose), and one revising agent per file.
 
-1. **Read** the skill's guidance in [`skills/`](../../skills) at the repository root, especially
-   the CLI command template in [`api-reference.md`](../../skills/inside-mac/references/api-reference.md) (synopsis, arguments, options,
-   environment/config precedence, stdio, exit statuses, side effects, idempotency, examples, see
-   also).
-2. **Researched** the CLI by cloning `vercel-labs/skills` at the commit above and reading its
-   TypeScript source, tests, and README directly — every command, source-parsing rule, agent
-   registry entry, and lock-file schema in this guide traces back to that source. A handful of
-   command transcripts were captured by running the CLI from a clean temporary `HOME` directory
-   against local, non-network test fixtures (see the manuscript's per-chapter examples).
-3. **Wrote** the chapters in [`src/`](src) following the four-layer chapter contract of that version
-   (About → Using → Reference → Summary) from [`architecture.md`](../../skills/inside-mac/references/architecture.md),
-   [`voice-and-tone.md`](../../skills/inside-mac/references/voice-and-tone.md) for prose, and
-   [`concepts.md`](../../skills/inside-mac/references/concepts.md)/[`task-guides.md`](../../skills/inside-mac/references/task-guides.md) for the conceptual and workflow sections.
-4. **Rendered** the PDF with the skill's PDF pipeline: this directory is a copy of
-   [`skills/inside-mac/assets/`](../../skills/inside-mac/assets) with its sample `src/` replaced by this guide's chapters and
-   `book.json`'s title set.
-5. **Verified** visually: rasterized pages with `pdftoppm`, checked the cover, contents, a chapter
-   opener, every figure, and a reference page, and iterated on Mermaid syntax and figure sizing
-   until the build produced no `pageerror` and no figure was separated from its caption or pushed
-   to an awkwardly blank page.
+1. **Plan.** The planning agent read the skill, studied the CLI's TypeScript source, tests, and
+   docs at the tag above, and gave every file a page budget and a word budget of 220 words per
+   page, as [`architecture.md`](../../skills/inside-mac/references/architecture.md) describes. The
+   plan totaled 47.5 pages.
+2. **Draft.** Each drafting agent measured its file against its word budget. Every file finished
+   within 10% of its budget, so the cutting pass changed nothing.
+3. **Capture.** Every command transcript was captured from `skills` 1.7.4. Each run used a fresh
+   temporary `HOME`, local fixture skills as sources, and `DISABLE_TELEMETRY=1`, so no run touched
+   a real configuration or sent telemetry. The book shows sandbox paths as
+   `/tmp/demo`.
+4. **Review and revise.** The reviewers reported 54 findings, 17 of them major. The revising agents
+   applied all of them except four that asked for changes in another file. The book ended at about
+   12,000 words.
+5. **Render.** This directory is a copy of
+   [`skills/inside-mac/assets/`](../../skills/inside-mac/assets) with its sample `src/` replaced by
+   this guide's chapters and `book.json`'s title set. The pipeline's figure check passed every
+   figure at 5.5 pt or larger, and every internal link resolves to a heading.
+
+## Claims marked Unverified
+
+The book marks two claims **Unverified**, as
+[`content.md`](../../skills/inside-mac/references/content.md) asks for claims a reader would act on:
+
+- Windows behavior, such as directory junctions in place of symbolic links. It is read from the
+  source, and no example was run on Windows.
+- The scope of the `notion` source in Chapter 2's source-format table, which the CLI routes
+  through a dedicated code path that the book did not exercise.
 
 ## Rebuilding
 
@@ -78,26 +90,14 @@ rebuild:
 PDF="Inside Skills- Agent Skills and the skills CLI.pdf"
 pdftoppm -r 150 -png -f 1  -l 1  -singlefile "$PDF" preview/01-cover
 pdftoppm -r 150 -png -f 2  -l 2  -singlefile "$PDF" preview/02-contents
-pdftoppm -r 150 -png -f 7  -l 7  -singlefile "$PDF" preview/03-chapter-opener
-pdftoppm -r 150 -png -f 26 -l 26 -singlefile "$PDF" preview/04-figure
-pdftoppm -r 150 -png -f 38 -l 38 -singlefile "$PDF" preview/05-reference
+pdftoppm -r 150 -png -f 8  -l 8  -singlefile "$PDF" preview/03-chapter-opener
+pdftoppm -r 150 -png -f 21 -l 21 -singlefile "$PDF" preview/04-figure
+pdftoppm -r 150 -png -f 45 -l 45 -singlefile "$PDF" preview/05-reference
 ```
 
-(Page numbers will shift if you edit the source; check the build's own page count and the table of
-contents first.)
-
-## Claims marked Inferred
-
-This guide marks exactly one claim as **Inferred** rather than directly verified: the precise scope
-of `skills add`'s Notion-workspace source integration (Chapter 2, "Using Skill Packages: Resolving
-Sources"). The source recognizes and routes Notion URLs through a dedicated code path, but this
-guide did not verify its authentication or pack-selection behavior to the same depth as every other
-source format. See Appendix C, "Known Gaps and Open Questions," for the full list of intentionally
-underspecified areas.
+Page numbers shift when the source changes, so check the table of contents first.
 
 ## What this is not
 
 This example does not modify, vendor, or redistribute any code from `vercel-labs/skills`. The
-cloned checkout used for research was made in a scratch directory outside this repository and is
-not included here.
-</content>
+checkout used for research was made outside the tracked tree and is not included here.

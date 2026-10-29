@@ -6,28 +6,30 @@ An agent skill for writing technical documentation in the style of Apple's **Ins
 
 ## Examples
 
-[`examples/zustand`](examples/zustand) is a complete, from-scratch guide written with an earlier version of this skill for
-[Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management library: six
-chapters, a preface, and three appendixes, rendered to a 67-page PDF with the skill's PDF pipeline. It is
-unofficial and not affiliated with pmndrs. See the example's own README for how it was produced and
+[`examples/zustand`](examples/zustand) is a complete, from-scratch guide written with this skill for
+[Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management library: four
+concept chapters, five task chapters, a reference chapter, a preface, and three appendixes,
+rendered to a 95-page PDF with the skill's PDF pipeline. It is unofficial and not affiliated with
+pmndrs. See the example's own README for how it was produced and
 which version of Zustand it documents.
 
 <p>
-  <img src="examples/zustand/preview/01-cover.png" alt="Cover of Inside Zustand: State Management with Zustand" width="45%">
-  <img src="examples/zustand/preview/04-figure.png" alt="Figure 1-1 from the Zustand guide: how components subscribe to a store through selectors" width="45%">
+  <img src="examples/zustand/preview/01-cover.png" alt="Cover of Inside Zustand: State Management for React" width="45%">
+  <img src="examples/zustand/preview/04-figure.png" alt="Figure 1-1 from the Zustand guide: components and plain code reach the same store" width="45%">
 </p>
 
 [Read the PDF](<examples/zustand/Inside Zustand- State Management for React.pdf>) ·
 [Read the source](examples/zustand/src) · [Read the README](examples/zustand/README.md)
 
-[`examples/skills-cli`](examples/skills-cli) is a complete guide, written with an earlier version of this skill, to the [`skills`](https://github.com/vercel-labs/skills)
-CLI (the open agent skills ecosystem, `npx skills …`): six chapters, a preface, and three
-appendixes, rendered to a 51-page PDF with the skill's PDF pipeline. See the example's own README for how it
+[`examples/skills-cli`](examples/skills-cli) is a complete guide, written with this skill, to the [`skills`](https://github.com/vercel-labs/skills)
+CLI (the open agent skills ecosystem, `npx skills …`): three concept chapters, three task
+chapters, a command reference, a preface, and three appendixes, rendered to a 58-page PDF with the
+skill's PDF pipeline. See the example's own README for how it
 was produced and which version and commit of `skills` it documents.
 
 <p>
   <img src="examples/skills-cli/preview/01-cover.png" alt="Cover of Agent Skills and the skills CLI" width="45%">
-  <img src="examples/skills-cli/preview/04-figure.png" alt="An agent-targets figure from the skills CLI guide" width="45%">
+  <img src="examples/skills-cli/preview/04-figure.png" alt="Figure 3-1 from the skills CLI guide: symlink mode compared with copy mode" width="45%">
 </p>
 
 [Read the PDF](<examples/skills-cli/Inside Skills- Agent Skills and the skills CLI.pdf>) ·

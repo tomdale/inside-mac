@@ -16,7 +16,7 @@
 }
 @page cover { margin: 0; @top-left { content: none } @top-right { content: none } @bottom-left { content: none } @bottom-right { content: none } }
 
-html { font-family: "Palatino", "Palatino Linotype", "Book Antiqua", Georgia, serif; font-size: 9.4pt; line-height: 1.38; color: #111; }
+html { font-family: "Palatino", "Palatino Linotype", "Book Antiqua", Georgia, serif; font-size: 9.8pt; line-height: 1.45; color: #111; }
 body { margin: 0; }
 p { margin: 0 0 0.65em; orphans: 3; widows: 3; hyphens: auto; }
 a { color: inherit; text-decoration: none; }
@@ -52,9 +52,9 @@ h1.chapter { font: 700 27pt/1.1 "Helvetica Neue", Helvetica, sans-serif; letter-
   border-top: 3pt solid #000; padding-top: 10pt; string-set: chapter-title content(text); }
 h1.chapter.unnumbered { border-top-width: 3pt; }
 
-h2 { font: 700 14pt/1.2 "Helvetica Neue", Helvetica, sans-serif; margin: 17pt 0 6pt; border-top: 0.75pt solid #000; padding-top: 5pt; break-after: avoid; }
-h3 { font: 700 10.8pt/1.25 "Helvetica Neue", Helvetica, sans-serif; margin: 12pt 0 4pt; break-after: avoid; }
-h4 { font: 700 9.6pt "Helvetica Neue", Helvetica, sans-serif; margin: 9pt 0 3pt; break-after: avoid; }
+h2 { font: 700 14.5pt/1.2 "Helvetica Neue", Helvetica, sans-serif; margin: 22pt 0 7pt; border-top: 0.75pt solid #000; padding-top: 5pt; break-after: avoid; }
+h3 { font: 700 11pt/1.25 "Helvetica Neue", Helvetica, sans-serif; margin: 15pt 0 5pt; break-after: avoid; }
+h4 { font: 700 9.8pt "Helvetica Neue", Helvetica, sans-serif; margin: 11pt 0 4pt; break-after: avoid; }
 
 /* Roadmap paragraphs right after chapter titles */
 section[class$="-start"] + p { font-size: 11pt; line-height: 1.4; }
@@ -91,7 +91,7 @@ figure { margin: 12pt 0 14pt; break-inside: avoid; }
 p.figcaption { font: 8.8pt/1.35 "Helvetica Neue", Helvetica, sans-serif; margin: 0 0 5pt; }
 p.figcaption strong { font-weight: 700; }
 pre.mermaid { background: none; border: 0.5pt solid #ccc; padding: 10pt 6pt; margin: 0 0 14pt; text-align: center; break-inside: avoid; }
-pre.mermaid svg { max-width: 92% !important; height: auto; max-height: 3.7in; }
+pre.mermaid svg { max-width: 100% !important; height: auto; max-height: 4.4in; }
 
 blockquote { margin: 8pt 0; padding-left: 10pt; border-left: 1.5pt solid #999; color: #333; font-style: italic; }
 hr { border: 0; border-top: 0.5pt solid #999; margin: 14pt 0; }

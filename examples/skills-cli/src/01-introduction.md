@@ -1,166 +1,108 @@
 # Introduction to Agent Skills
 
-A coding agent's abilities come from three places: the model, the tools it
-can call, and the instructions it has been given. A **skill** is a portable
-unit of the third kind — a folder with a `SKILL.md` file at its root, written
-so an agent can decide when to read it and what to do once it has. The
-`skills` CLI (npm package `skills`, run as `npx skills …`) installs, updates,
-lists, and removes skills across whichever coding agents you use, without
-you hand-copying files into each agent's own configuration directory.
+This chapter explains what an agent skill is, what the `skills` CLI does with one, and where the CLI's responsibility ends, then installs one skill into a sample project. If you already know the model and want only the commands, go to [Installing and Managing Skills](#installing-and-managing-skills).
 
-**Read this chapter if** you are new to agent skills or to this CLI. **Before
-you begin**, you should have Node.js and `npx` available; nothing else. **In
-this chapter** you will learn what a skill is, what problem the CLI solves,
-how an agent discovers an installed skill at all, and you will walk through
-one complete install end to end. **You can skip** this chapter if you have
-already installed skills with this CLI and want to jump straight to
-Chapter 3 (day-to-day use), Chapter 4 (agent directory reference), or
-Chapter 6 (command reference).
+## Read this chapter if
 
-## About Agent Skills
+- You have not used agent skills before, or you have only copied them into place by hand.
+- You need to explain to a team what the CLI changes on disk and what it leaves to each agent.
 
-### What a Skill Is
+## In this chapter you will
 
-A skill is a directory containing a file named `SKILL.md`, plus any
-supporting resources — scripts, templates, reference documents — that the
-instructions point to. `SKILL.md` opens with YAML frontmatter delimited by
-`---` lines, followed by Markdown body text:
+- Learn what a skill is and why several agents complicate sharing one.
+- Learn what the CLI does and where its responsibility ends.
+- Install a skill into a project and list it.
 
-```yaml
----
-name: web-design-guidelines
-description: Review UI code for Web Interface Guidelines compliance. Use when asked to "review my UI", "check accessibility", "audit design", or "review UX".
----
-```
+## The problem skills solve
 
-The frontmatter's `name` and `description` are the only fields the CLI
-requires; a `SKILL.md` missing either one is silently skipped during
-discovery, with a warning printed to the console. `description` is what an
-agent (or a human skimming a list) uses to decide *when* to load the skill,
-so it does double duty as documentation and as a matching signal — Chapter 5
-covers how to write a description that earns its place.
+A coding agent works from general knowledge plus the instructions it finds in a session. Many tasks need narrower guidance, such as how your team writes release notes or which checks run before a release is tagged. Pasting that guidance into each conversation is unreliable, and copying it into each repository produces versions that drift apart.
 
-### Progressive Disclosure
+A [skill](#what-a-skill-is) packages that guidance as a directory. The directory holds a `SKILL.md` file, which gives the skill a name, a short description, and Markdown instructions, along with any supporting files the instructions refer to. An agent that supports skills reads the descriptions and loads a skill's instructions when a task calls for them.
 
-The instructions in `SKILL.md` are meant to be read completely once a skill
-is relevant, but the frontmatter `description` should be readable — and
-distinguishing — without loading the rest of the file at all. This is
-progressive disclosure applied to agent context: an agent (or the CLI's own
-`find` and `list` commands) can scan hundreds of descriptions cheaply, then
-pay the cost of reading a full `SKILL.md` only for the one or two skills a
-task actually needs. A skill's supporting files extend this further: a
-`SKILL.md` can defer detail to a linked reference document that only gets
-read if the instructions tell the agent to open it, rather than inlining
-everything up front.
+Because a skill is only files, it can travel between projects and between agents. The obstacle is location, because agents look for skills in different directories. In a project, Codex and Cursor read `.agents/skills`, while Claude Code reads `.claude/skills`. Without a tool, a team that uses two of these agents keeps two copies of every skill and updates both by hand.
 
-### The Problem the CLI Solves
+## What the skills CLI does
 
-Every coding agent that supports skills reads them from its own directory,
-by its own convention — `.claude/skills` for Claude Code, `.agents/skills`
-for Codex, OpenCode, and dozens of others, `.windsurf/skills` for Windsurf,
-and so on for more than seventy agents in total. Without a shared installer,
-distributing one skill to a team using three
-different agents means either maintaining three copies or hand-symlinking
-directories. `skills` treats this as a package-management problem: a skill
-has a *source* (a GitHub repository, a URL, a local path), and the CLI
-resolves that source, copies the skill into one canonical location, and
-links or copies it into every agent directory you choose — the same shape
-of problem `npm` solves for JavaScript dependencies, applied to Markdown
-instructions instead of code.
+The `skills` CLI, run as `npx skills`, is a package manager for skills. An install does three things:
 
-> [!NOTE]
-> Many agents — Codex, Cursor, OpenCode, Amp, and dozens of others — actually
-> read skills from a shared **universal** directory, `.agents/skills` at the
-> project root or `~/.agents/skills` for a global install, rather than an
-> agent-specific one. Chapter 4 has the full directory-by-directory
-> reference; the important idea for now is that the CLI, not you, tracks
-> which agents share a directory and which need their own copy.
+1. It fetches skills from a [source](#source-formats), such as a local folder, a Git repository, or a website.
+2. It places each selected skill where the agents you chose will look for it, in the current project or in your [home directory](#project-scope-and-global-scope).
+3. It records where each skill came from in a [lock file](#lock-files), so that later commands can update, restore, and remove the skill.
 
-### Non-Goals
+Once the files are in place, the CLI's part is over. It does not run a skill, and it does not decide when an agent uses one; the agent makes that choice. The CLI does not sandbox a skill either. An installed skill acts with the agent's permissions, so if the agent can run shell commands, edit files, or reach the network, a skill's instructions can direct it to do those things.
 
-The CLI installs and manages skill *files*. It does not:
+The CLI does not inspect or approve a skill's content. For a public GitHub repository, it can display risk assessments from the skills.sh audit service, but they are advisory, and when the service fails or has no data the install proceeds without them ([what the CLI sends](#network-access-authentication-and-telemetry)).
 
-- execute a skill or interpret its instructions — that is the agent's job,
-  once the skill is on disk and the agent chooses to read it;
-- sandbox or restrict what a skill's instructions can ask the agent to do —
-  the CLI prints a standing reminder that "skills run with full agent
-  permissions" after every install, and means it;
-- provide a runtime plugin API, a package registry with its own hosting, or
-  dependency resolution between skills. A skill can bundle supporting files,
-  but skills do not declare dependencies on other skills.
+Responsibility for a skill's content stays with you, which is why a successful install ends with a reminder to review skills before use. Read a skill's `SKILL.md` and supporting files before you install it from a source you do not control.
 
-### How Agents Discover Skills
+## The parts of the system
 
-Once a skill's files are in an agent's configured skills directory, it is
-the agent's own harness — not `skills` — that decides when to surface that
-skill's `description` to the model and when to load the rest of `SKILL.md`.
-The CLI's job ends at getting the right bytes into the right directory,
-tracked well enough that a later `update` or `remove` can find them again.
+An install connects six parts: a source, the CLI, the [canonical directory](#the-canonical-skills-directory) that holds a skill's real files, the [agent directories](#universal-and-agent-specific-agents) that link to it, the lock file, and the agents that read the result.
 
-**Figure 1-1: A skill's source, the CLI's canonical copy, and each agent's own directory are three distinct locations connected by one installation.**
+**Figure 1-1: In symlink mode, the CLI keeps one copy in .agents/skills, and every chosen agent reads it from there.**
 
 ```mermaid
 flowchart TB
-  A["Skill source<br/>(GitHub, GitLab, Azure Repos, a URL, or local)"] --> B["skills CLI copies it to<br/>.agents/skills/&lt;name&gt;"]
-  B --> C["Each selected agent reads, symlinks to,<br/>or copies that one canonical skill"]
+    accTitle: One canonical copy read by several agents
+    accDescr: The CLI fetches a skill from a source, writes one canonical copy in .agents/skills, and records the source in skills-lock.json. Universal agents read the canonical copy in place, and Claude Code reads it through a symbolic link in .claude/skills that points at the canonical copy.
+    source["Source (repo, folder, URL)"] --> cli["skills CLI"]
+    cli --> canonical["Canonical copy .agents/skills/name"]
+    cli -->|"records source"| lock["skills-lock.json"]
+    canonical -->|"read in place"| universal["Universal agents (Codex, Cursor)"]
+    link["Link .claude/skills/name"] -.->|"symlink"| canonical
+    link -->|"read through link"| claude["Claude Code"]
 ```
 
-## A Worked Example
+In [symlink mode](#symlink-mode-and-copy-mode), the result is one real copy with many readers. When a project installs `release-notes` for Claude Code and Codex, the files exist once, in `.agents/skills/release-notes`. Codex, a universal agent, reads them there, and `.claude/skills/release-notes` is a symbolic link to the same directory. Replacing that one copy changes what every linked agent reads.
 
-Installing the `web-design-guidelines` skill from the `vercel-labs/agent-skills`
-repository, into the current project, for Claude Code only:
+## A first skill, end to end
 
-```sh
-$ npx skills add vercel-labs/agent-skills --skill web-design-guidelines --agent claude-code -y
+This example uses the sandbox from [The sample setup](#the-sample-setup): a project at `/tmp/demo/project` and, beside it, a local source at `/tmp/demo/acme-skills` that contains two skills.
+
+From the project directory, install the `release-notes` skill for Claude Code. The `--skill` option selects one of the two skills, `-a claude-code` names the target agent, and `-y` accepts defaults instead of prompting. Name the agent explicitly, because without `-a` the CLI chooses targets by detecting agents and can install for many more than you intend ([How the CLI chooses target agents](#how-the-cli-chooses-target-agents)).
+
+```console
+$ npx skills add ../acme-skills --skill release-notes -a claude-code -y
+┌   skills
+◇  Source: /tmp/demo/acme-skills
+◇  Local path validated
+◇  Found 2 skills
+●  Selected 1 skill: release-notes
+◇  Installation Summary ───────────╮
+│                                  │
+│  ./.agents/skills/release-notes  │
+│    copy → Claude Code            │
+│                                  │
+├──────────────────────────────────╯
+◇  Installation complete
+◇  Installed 1 skill ──────────────────╮
+│                                      │
+│  ✓ release-notes (copied)            │
+│    → ./.claude/skills/release-notes  │
+│                                      │
+├──────────────────────────────────────╯
+└  Done!  Review skills before use; they run with full agent permissions.
 ```
 
-Following this one command through the system:
+The project now contains three files:
 
-1. The CLI parses `vercel-labs/agent-skills` as GitHub shorthand and resolves
-   it to `https://github.com/vercel-labs/agent-skills.git` (Chapter 2 covers
-   every source format it accepts).
-2. It fetches the repository's skill listing — using a fast metadata lookup
-   for eligible GitHub sources, falling back to a shallow `git clone`
-   otherwise — and discovers every `SKILL.md` under the repository's `skills/`
-   directory.
-3. `--skill web-design-guidelines` narrows that list to one match; without
-   it, and without `-y`, the CLI would prompt you to choose.
-4. It copies that skill's files into the canonical project directory,
-   `.agents/skills/web-design-guidelines/`.
-5. Because you asked for one non-universal agent (`claude-code`), it also
-   creates `.claude/skills/web-design-guidelines` as a symlink back to the
-   canonical copy — the default installation mode. `--copy` would write an
-   independent copy there instead.
-6. It records the install in `skills-lock.json` at the project root, so a
-   later `skills update` or `skills remove web-design-guidelines` knows
-   exactly where the skill came from.
+```console
+$ find . -type f | sort
+./.claude/skills/release-notes/SKILL.md
+./.claude/skills/release-notes/template.md
+./skills-lock.json
+```
 
-Claude Code needs no further step: the next time it starts (or reloads its
-skills), `.claude/skills/web-design-guidelines/SKILL.md` is there to read.
+Claude Code is the only target, so there is nothing to share and no link to create. The CLI uses [copy mode](#symlink-mode-and-copy-mode) and writes the whole skill directory, supporting file included, straight into `.claude/skills`, although the summary names the canonical path. No `.agents/skills` directory exists.
 
-## Summary
+List what the project has installed:
 
-**Mental model.** A skill is a `SKILL.md` file with required `name` and
-`description` frontmatter, plus optional supporting files. The CLI resolves
-a source, keeps one canonical copy per project or per user, and links or
-copies that copy into whichever agent directories you choose. Agents decide
-for themselves when to read an installed skill; the CLI's job stops at
-installation.
+```console
+$ npx skills list
+Project Skills
 
-**Common path.** Resolve a source → discover its skills → choose which
-skills and which agents → write the canonical copy → link or copy into
-agent directories → record the install in a lock file.
+release-notes ./.claude/skills/release-notes
+  Agents: Claude Code  Source: /tmp/demo/acme-skills
+```
 
-**Invariants.**
-
-- A `SKILL.md` without both `name` and `description` in its frontmatter is
-  never installed.
-- Skills run with the full permissions of the agent that reads them; the
-  CLI does not sandbox their instructions.
-- Universal agents (Chapter 4) always read from `.agents/skills`, never from
-  a separate agent-specific copy, for either scope.
-
-**Continue.** To understand what makes a valid skill package and how the CLI
-resolves the sources it can install from, read Chapter 2. To skip straight
-to day-to-day commands, read Chapter 3.
-</content>
+[Installing and Managing Skills](#installing-and-managing-skills) continues from this project with the complete workflow.
