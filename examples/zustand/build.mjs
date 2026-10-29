@@ -1,7 +1,10 @@
 // Builds a book from src/*.md into build/book.html and "<title>.pdf", using
 // the title in book.json. Markdown is rendered with marked; Mermaid renders the
 // diagrams and Paged.js paginates (running heads, TOC page numbers) inside
-// headless Chrome, which puppeteer-core drives to print the PDF.
+// headless Chrome, which puppeteer-core drives to print the PDF. After
+// pagination it reports figures whose smallest label renders below
+// MIN_FIGURE_PT points, because Mermaid scales a wide diagram down to the page
+// width and its labels shrink with it.
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -16,6 +19,7 @@ const pdfPath = path.join(root, `${book.title.replace(/[\\/:*?"<>|]/g, '-')}.pdf
 const chrome =
   process.env.CHROME_PATH ??
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const minFigurePt = Number(process.env.MIN_FIGURE_PT ?? 5.5);
 
 const slugCounts = new Map();
 function slugify(text) {
@@ -165,8 +169,44 @@ try {
   const err = await page.evaluate('window.__pagedError');
   if (err) throw new Error(err);
   const pages = await page.evaluate('document.querySelectorAll(".pagedjs_page").length');
+  const figures = await page.evaluate(measureFigureLabels);
+  const small = figures.filter((f) => f.minPt < minFigurePt);
   await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true, timeout: 300_000 });
   console.log(`Wrote ${pdfPath} (${pages} pages)`);
+  console.log(`Checked ${figures.length} figure${figures.length === 1 ? '' : 's'} for labels below ${minFigurePt} pt`);
+  for (const f of small) {
+    console.warn(`  page ${f.page}: ${f.caption}: smallest label ${f.minPt.toFixed(1)} pt`);
+  }
+  if (small.length && process.env.STRICT_FIGURES) process.exitCode = 1;
 } finally {
   await browser.close();
+}
+
+// Runs in the page. Returns the page number, caption, and smallest rendered
+// label size in points for each Mermaid figure. An SVG scales its content by
+// the ratio of its rendered box to its viewBox; CSS pixels are 0.75 pt.
+function measureFigureLabels() {
+  const results = [];
+  for (const svg of document.querySelectorAll('.pagedjs_page pre.mermaid svg')) {
+    const vb = svg.viewBox.baseVal;
+    const box = svg.getBoundingClientRect();
+    if (!vb || !vb.width || !vb.height || !box.width) continue;
+    const scale = Math.min(box.width / vb.width, box.height / vb.height);
+    let minPx = Infinity;
+    for (const el of svg.querySelectorAll('text, foreignObject span, foreignObject div')) {
+      if (!el.textContent.trim() || el.closest('defs')) continue;
+      const size = parseFloat(getComputedStyle(el).fontSize);
+      if (size) minPx = Math.min(minPx, size);
+    }
+    if (minPx === Infinity) continue;
+    const pageEl = svg.closest('.pagedjs_page');
+    const caption = svg.closest('figure')?.querySelector('.figcaption strong')?.textContent
+      ?? 'uncaptioned figure';
+    results.push({
+      page: pageEl?.dataset.pageNumber ?? '?',
+      caption: caption.match(/^Figure\s+[\w.-]+/)?.[0] ?? caption,
+      minPt: minPx * scale * 0.75,
+    });
+  }
+  return results;
 }
