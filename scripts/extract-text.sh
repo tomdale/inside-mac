@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Extract plain text from corpus/pdf/*.pdf into corpus/text/*.txt with
-# `pdftotext -layout` (poppler). Line numbers in skills/imac-style/references/sources.md
+# `pdftotext -layout` (poppler). Line numbers in skills/inside-mac/references/sources.md
 # refer to this output.
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"

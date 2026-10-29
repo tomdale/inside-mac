@@ -1,8 +1,8 @@
 # Inside Zustand: State Management with Zustand
 
-A complete example output of the `inside-mac` skills: a from-scratch, Inside-Macintosh-style
+A complete example output of the `inside-mac` skill: a from-scratch, Inside-Macintosh-style
 technical guide to [Zustand](https://github.com/pmndrs/zustand), the pmndrs React state-management
-library, rendered as a print-quality PDF book with `imac-pdf-book`.
+library, rendered as a print-quality PDF book with the skill's PDF pipeline.
 
 **[Read the PDF](./Inside%20Zustand-%20State%20Management%20for%20React.pdf)** — 67 pages.
 
@@ -59,18 +59,21 @@ notes that a real test suite still needs a module alias or mock to substitute it
 
 ## How this was produced
 
-Written using the `inside-mac` skills against the cloned Zustand source and docs:
+Written against the cloned Zustand source and docs with an earlier version of the `inside-mac` skill,
+which split its guidance into separate `imac-*` skills. Each is named below by the reference file in
+[`skills/inside-mac`](../../skills/inside-mac) that now holds its guidance. That version ended each chapter with a
+prose Summary section, which is why the chapters in `src/` have one.
 
-- `imac-doc-architecture` for the book's chapter layout and each chapter's roadmap opener.
-- `imac-concept-explainer` for the "About" sections (store internals, the React integration,
+- [`architecture.md`](../../skills/inside-mac/references/architecture.md) for the book's chapter layout and each chapter's roadmap opener.
+- [`concepts.md`](../../skills/inside-mac/references/concepts.md) for the "About" sections (store internals, the React integration,
   middleware composition, Zustand's TypeScript design).
-- `imac-task-guides` for the "Using" sections (creating stores, wiring React components, applying
+- [`task-guides.md`](../../skills/inside-mac/references/task-guides.md) for the "Using" sections (creating stores, wiring React components, applying
   each middleware, testing and patterns).
-- `imac-api-reference` for every reference entry (`createStore`, `StoreApi`, `create`, `useStore`,
+- [`api-reference.md`](../../skills/inside-mac/references/api-reference.md) for every reference entry (`createStore`, `StoreApi`, `create`, `useStore`,
   `useShallow`, and the six middleware).
-- `imac-voice-and-tone` for modal-verb discipline, callouts, and rule/rationale/consequence prose.
-- `imac-review`'s checklist, applied as a self-review pass before rendering.
-- `imac-pdf-book` to render the Markdown in `src/` to the PDF above.
+- [`voice-and-tone.md`](../../skills/inside-mac/references/voice-and-tone.md) for modal-verb discipline, callouts, and rule/rationale/consequence prose.
+- [`review.md`](../../skills/inside-mac/references/review.md)'s checklist, applied as a self-review pass before rendering.
+- [`pdf-book.md`](../../skills/inside-mac/references/pdf-book.md) and its pipeline to render the Markdown in `src/` to the PDF above.
 
 ## Rebuilding
 
@@ -81,7 +84,7 @@ npm run build        # writes "Inside Zustand: State Management for React.pdf" a
 ```
 
 Requires a local Google Chrome install; set `CHROME_PATH` if it isn't at the default macOS
-location. See [`../../skills/imac-pdf-book/SKILL.md`](../../skills/imac-pdf-book/SKILL.md) for the
+location. See [`pdf-book.md`](../../skills/inside-mac/references/pdf-book.md) for the
 build pipeline's source-file conventions and troubleshooting.
 
 To regenerate the preview images after a rebuild:

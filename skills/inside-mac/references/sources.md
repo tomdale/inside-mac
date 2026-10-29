@@ -1,6 +1,6 @@
 # Where the patterns come from
 
-These skills were distilled from Apple's *Inside Macintosh* series: the original Volumes I–VI (1985–1991) and the "new" series (1992–1994). This file lists the source passages behind each pattern. It does not reproduce Apple's text: each entry paraphrases the technique and says where to find the original.
+This skill was distilled from Apple's *Inside Macintosh* series: the original Volumes I–VI (1985–1991) and the "new" series (1992–1994). This file lists the source passages behind each pattern. It does not reproduce Apple's text: each entry paraphrases the technique and says where to find the original.
 
 Locations are line numbers in the plain-text extraction that `scripts/fetch-sources.sh` and `scripts/extract-text.sh` produce (`pdftotext -layout`, one `.txt` file per PDF). Treat them as approximate. Scan quality varies, and different `pdftotext` versions can shift lines.
 
@@ -13,7 +13,10 @@ Use this file to study the originals. Do not copy their wording into new documen
 | Declares that nearly every chapter follows one standard structure, then describes it | *Inside Macintosh, Volume VI* (1991) | lines 2640–2643 |
 | Tells readers that a few routines cover the basic operations, so they can skip most of a chapter | *Inside Macintosh, Volume III* (1985) | lines 301–305 |
 | Admits that most programmers will never need to read everything | *Inside Macintosh, Volume V* (1986) | lines 564–567 |
-| Restates the standard chapter structure for the new series | *Inside Macintosh: Memory* (1992) | lines 487–489 |
+| Restates the standard chapter structure for the new series: one chapter per manager, with About, Using, Reference, and Summary sections | *Inside Macintosh: Memory* (1992) | lines 487–507 |
+| Describes the closing Summary section as the manager's interface listing (constants, data types, routines, result codes), not a recap | *Inside Macintosh: Memory* (1992) | lines 503–506 |
+| Shows a closing Summary section: declarations grouped under Constants and Data Types, with no prose | *Inside Macintosh: Memory* (1992) | ~line 10241 |
+| Addresses the application developer managing memory in their own program, and routes newcomers to an introductory chapter | *Inside Macintosh: Memory* (1992) | lines 438–454 |
 | Opens a chapter by telling some readers they can skip it entirely | *AOCE Service Access Modules* (1994) | lines 1057–1085 |
 
 ## Concept before mechanism

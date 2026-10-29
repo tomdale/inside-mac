@@ -2,7 +2,7 @@
 
 A complete, from-scratch technical guide to the [`skills`](https://github.com/vercel-labs/skills)
 CLI — the open agent skills ecosystem, installed and run as `npx skills …` — written and rendered
-using this repository's `imac-*` skills. It is **unofficial**: not affiliated with, endorsed by, or
+using an earlier version of this repository's `inside-mac` skill. It is **unofficial**: not affiliated with, endorsed by, or
 reviewed by Vercel, Inc. or the `skills` maintainers.
 
 - **Covers:** `skills` v1.7.0, commit [`7407f38`](https://github.com/vercel-labs/skills/commit/7407f3893ad4dceab546ac002c3ef806e4000c73)
@@ -38,8 +38,12 @@ Plus a Preface and three appendixes: Glossary, File Formats, and Known Gaps and 
 
 ## How this was produced
 
-1. **Read** every `imac-*` SKILL.md in [`skills/`](../../skills) at the repository root, especially
-   `imac-api-reference`'s CLI command template (synopsis, arguments, options,
+That earlier version split its guidance into separate `imac-*` skills. Each is named below by the
+reference file in [`skills/inside-mac`](../../skills/inside-mac) that now holds its guidance. That version also ended
+each chapter with a prose Summary section, which is why the chapters in `src/` have one.
+
+1. **Read** the skill's guidance in [`skills/`](../../skills) at the repository root, especially
+   the CLI command template in [`api-reference.md`](../../skills/inside-mac/references/api-reference.md) (synopsis, arguments, options,
    environment/config precedence, stdio, exit statuses, side effects, idempotency, examples, see
    also).
 2. **Researched** the CLI by cloning `vercel-labs/skills` at the commit above and reading its
@@ -47,11 +51,12 @@ Plus a Preface and three appendixes: Glossary, File Formats, and Known Gaps and 
    registry entry, and lock-file schema in this guide traces back to that source. A handful of
    command transcripts were captured by running the CLI from a clean temporary `HOME` directory
    against local, non-network test fixtures (see the manuscript's per-chapter examples).
-3. **Wrote** the chapters in [`src/`](src) following the `imac-doc-architecture` four-layer
-   contract (About → Using → Reference → Summary), `imac-voice-and-tone` for prose, and
-   `imac-concept-explainer`/`imac-task-guides` for the conceptual and workflow sections.
-4. **Rendered** the PDF with `imac-pdf-book`: this directory is a copy of
-   `skills/imac-pdf-book/assets/` with its sample `src/` replaced by this guide's chapters and
+3. **Wrote** the chapters in [`src/`](src) following the four-layer chapter contract of that version
+   (About → Using → Reference → Summary) from [`architecture.md`](../../skills/inside-mac/references/architecture.md),
+   [`voice-and-tone.md`](../../skills/inside-mac/references/voice-and-tone.md) for prose, and
+   [`concepts.md`](../../skills/inside-mac/references/concepts.md)/[`task-guides.md`](../../skills/inside-mac/references/task-guides.md) for the conceptual and workflow sections.
+4. **Rendered** the PDF with the skill's PDF pipeline: this directory is a copy of
+   [`skills/inside-mac/assets/`](../../skills/inside-mac/assets) with its sample `src/` replaced by this guide's chapters and
    `book.json`'s title set.
 5. **Verified** visually: rasterized pages with `pdftoppm`, checked the cover, contents, a chapter
    opener, every figure, and a reference page, and iterated on Mermaid syntax and figure sizing

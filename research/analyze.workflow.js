@@ -1,4 +1,6 @@
-// Reproduces the corpus analysis that produced skills/imac-*.
+// Reproduces the corpus analysis behind skills/inside-mac. The synthesis phase
+// writes a first draft of the guidance as separate skills; skills/inside-mac
+// consolidates and revises that draft.
 // Runs with pi-dynamic-workflows (https://github.com/tomdale/toolbelt) or any
 // runner that provides agent()/parallel()/phase(). Pass:
 //   args.dir   absolute path to corpus/text
