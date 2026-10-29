@@ -49,6 +49,7 @@ Number figures by chapter (`Figure 3-2`) in the text itself. [concepts.md](conce
 - Body text is Palatino. Headings, tables, and running heads are Helvetica Neue. Code is Menlo.
 - Page numbers sit on the outside edge. The running head shows the chapter label on the left and the chapter title on the right, and is hidden on chapter-opening pages.
 - A chapter starts on the next page, which can be a left-hand page, so the book has fewer blank pages.
+- A page holds about 220 words of a typical technical chapter once code listings, tables, figures, and chapter openings are counted. Multiply a page budget by 220 to get a word budget.
 
 Make visual changes in `style.css` rather than `build.mjs`. Change `@page size` and the margins together.
 

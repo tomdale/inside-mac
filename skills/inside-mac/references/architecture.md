@@ -116,6 +116,8 @@ Route readers by what they want to do, and say why each cross-reference matters.
 
 When a book has a page or word budget, choose the material before drafting. List the candidate topics, rank them by reader need, and cut from the bottom of the list. Cut repetition, and cut enumerations that the source defines ([content.md](content.md)). Do not meet a budget by compressing the prose; [voice-and-tone.md](voice-and-tone.md) states how prose stays readable. Figure legibility also outranks page count ([concepts.md](concepts.md)).
 
+Give each chapter a budget in words as well as pages, using the layout's density ([pdf-book.md](pdf-book.md) gives it for the bundled pipeline), so that a writer can measure a draft with `wc -w`. Drafts routinely run well past an estimated length, so check every draft against its budget before review. A chapter over its budget loses its lowest-ranked topic. A revision that adds material to a chapter at its budget removes material of lower value, so the book stays within the length the plan chose.
+
 ## Cross-link by purpose
 
 - Use stable, descriptive anchors and headings that match what readers search for.

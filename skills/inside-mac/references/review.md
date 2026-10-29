@@ -25,7 +25,7 @@ Mention a strength only when it establishes a pattern worth reusing or offsets a
 - [ ] No section restates the model or a contract that another section owns.
 - [ ] Chapters end after their last substantive section, or with an interface summary of linked names. A prose recap is a finding.
 - [ ] Next-reading guidance lives in roadmaps or one-line pointers.
-- [ ] A length budget was met by cutting topics and enumerations, not by compressing prose.
+- [ ] Each chapter is within its word budget, met by cutting topics and enumerations rather than by compressing prose.
 
 ## 3. Content and sources ([content.md](content.md))
 
